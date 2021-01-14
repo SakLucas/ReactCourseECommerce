@@ -1,0 +1,15 @@
+.menu{
+    background-color: cadetblue;
+    box-shadow: rgba(230,230,230,0.5);
+    display: block;
+    filter: drop-shadow(0px 1px 10px teal);
+}
+.menu > *{
+    max-height:75px;
+    display: inline-block;
+}
+
+.links > p {
+    display: inline-block;
+    padding: 0px 50px 0px 50px;
+}
