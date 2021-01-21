@@ -3,9 +3,11 @@ import ItemCount from './ItemCount'
 
 const Item = ({item}) => {
     let styles={
+        border: 'solid 2px',
+        boxShadow:'1px 1px 1px 2px rgba(255,255,255,0.7)',
+        background: 'cyan',
         width: 250,
         height: 300,
-        backgroundColor: "cyan",
         margin: 30,
         padding: 15,
         display: "inline-block"
@@ -13,12 +15,11 @@ const Item = ({item}) => {
 
     return (
         <div style={styles}>
-            {console.log(item)}
-            <img alt="FALLBACK" src={item.imgUrl}/>
+            <img style={{maxWidth:'100%',maxHeight:'50%'}}alt="FALLBACK" src={item.imgUrl}/>
             <br/>
-            <span style={{backgroundColor:"pink"}}>{item.title}</span>
+            <span style={{backgroundColor:"pink", border:'solid 1px'}}>{item.title}</span>
             <br/>
-            <span>{item.price}</span>
+            <span>Precio: {item.price}</span>
             <ItemCount stock={5} inicial={1}></ItemCount>
         </div>
     );
