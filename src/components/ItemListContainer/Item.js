@@ -1,27 +1,36 @@
 import React from 'react';
+import {Button, Box, Grid} from '@material-ui/core'
 import ItemCount from './ItemCount'
 
 const Item = ({item}) => {
-    let styles={
-        border: 'solid 2px',
-        boxShadow:'1px 1px 1px 2px rgba(255,255,255,0.7)',
-        background: 'cyan',
-        width: 250,
-        height: 300,
-        margin: 30,
-        padding: 15,
-        display: "inline-block"
-    }
 
     return (
-        <div style={styles}>
-            <img style={{maxWidth:'100%',maxHeight:'50%'}}alt="FALLBACK" src={item.imgUrl}/>
-            <br/>
-            <span style={{backgroundColor:"pink", border:'solid 1px'}}>{item.title}</span>
-            <br/>
-            <span>Precio: {item.price}</span>
-            <ItemCount stock={5} inicial={1}></ItemCount>
-        </div>
+        <Grid
+            item
+            xs={6}
+            sm={3}
+            xl={2}
+        >
+            <Box
+                m={2}
+                p={3}
+                borderRadius={16}
+                color="primary.main"
+                boxShadow={3}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justify="center"
+            >
+                <span>{item.title}</span>
+                <img style={{maxWidth:'150px',maxHeight:'150px'}}alt="FALLBACK" src={item.image}/>
+                <br/>
+                <br/>
+                <Button variant="contained" color="primary">Ver Producto</Button>
+                {/* <ItemCount stock={5} inicial={1}></ItemCount> */}
+            </Box>
+        </Grid>
+
     );
 }
 
