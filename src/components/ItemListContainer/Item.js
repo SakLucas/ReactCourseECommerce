@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, Box, Grid} from '@material-ui/core'
+import { Button, Box, Grid } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import ItemCount from './ItemCount'
 
 const Item = ({item}) => {
@@ -26,7 +27,9 @@ const Item = ({item}) => {
                 <img style={{maxWidth:'150px',maxHeight:'150px'}}alt="FALLBACK" src={item.image}/>
                 <br/>
                 <br/>
-                <Button variant="contained" color="primary">Ver Producto</Button>
+                <Link to={`/store/${item.id}`}>
+                    <Button variant="contained" color="primary">Ver Producto</Button>
+                </Link>
                 {/* <ItemCount stock={5} inicial={1}></ItemCount> */}
             </Box>
         </Grid>

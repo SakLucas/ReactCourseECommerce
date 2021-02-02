@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const ItemDetail = ({item}) => {
+const ItemDetail = ({details}) => {
+    console.log(details);
+    useEffect(()=>{
+
+    },[details])
     return (
+
         <div>
-            <img alt="FALLBACK" src={item.imgUrl}/>
-            <h1>{item.title}</h1>
-            <bold>${item.price}</bold><br/>
-            <span>{item.desc}</span>
+            <img alt="FALLBACK" src={details.image}/>
+            <h1>{details?.title}</h1>
+            <strong>${details?.price}</strong><br/>
+            <span>{details?.description}</span>
         </div>
     );
 }

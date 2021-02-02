@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './App.css';
 import {NavBar} from './components/navbar/NavBar'
-import {ItemListContainer} from './components/ItemListContainer/ItemListContainer'
-import {Typography} from '@material-ui/core'
 import {ThemeProvider} from '@material-ui/core/styles'
 import { ItemDetailContainer } from './components/ItemListContainer/ItemDetailContainer';
 import Theme from './themeConfig'
@@ -36,10 +34,10 @@ useEffect(() => {
           <Route path="/" exact component={Home}/>
           <Route path="/home" component={Home}/>
           <Route path="/about" component={About}/>
-          <Route path="/store" component={Store}/>
+          <Route path="/store" exact component={Store}/>
           <Route path="/cart" component={Cart}/>
+          <Route path="/store/:id" component={ItemDetailContainer}></Route>
         </Switch>
-        {/* <ItemDetailContainer/> */}
       </Router>
       </ThemeProvider>
     </React.StrictMode>
