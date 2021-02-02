@@ -1,15 +1,22 @@
 import React, {useState} from 'react'
 import Button from '@material-ui/core/Button'
 
-export default function ItemCount({stock, inicial}){
-    const [count, setCount] = useState(() => 0);
+export default function ItemCount({stock, inicial = 0, handlerClick}){
+    const [count, setCount] = useState(() => inicial);
 
     function decrementCount(){
-        if(count >0) setCount(prevCount =>prevCount - 1);
+        if(count >0){
+            setCount(prevCount =>prevCount - 1);
+            handlerClick(count - 1)
+        }
+
     }
     function incrementCount(){
-        if(count < stock)
-        setCount(prevCount =>prevCount + 1)
+        if(count < stock) {
+            setCount(prevCount =>prevCount + 1);
+            handlerClick(count + 1)
+        };
+
     }
 
     return(
