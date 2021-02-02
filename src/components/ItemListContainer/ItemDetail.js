@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ItemCount from './ItemCount'
+import {Link} from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 
 const ItemDetail = ({details}) => {
     const [stock, setStock] = useState(() => 0);
@@ -10,7 +12,7 @@ const ItemDetail = ({details}) => {
         console.log(amount);
     }
     useEffect(() => {
-        setStock(Math.round(Math.random() * 10));
+        setStock(Math.round(Math.random() * 10) + 1);
     }, [])
 
     return (
@@ -20,8 +22,15 @@ const ItemDetail = ({details}) => {
             <strong>${details?.price}</strong><br/>
             <span>{details?.description}</span><br/>
             <span>Stock: {stock}</span><br/>
-            <span>SelectedAmount:{selectedAmount}</span>
-            <ItemCount stock={stock} handlerClick={handleItemCount}/>
+            <span>SelectedAmount:{selectedAmount}</span><br/>
+            {
+                selectedAmount !== stock?
+                    <ItemCount stock={stock} handlerClick={handleItemCount}/>
+                :
+                    <Link to={'/cart'}>
+                        <Button color="primary" variant="contained">Terminar mi compra</Button>
+                    </Link>
+            }
         </div>
     );
 }
