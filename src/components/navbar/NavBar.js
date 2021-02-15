@@ -1,21 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from './img/bobkat.png';
 import './NavBar.css';
 import { AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core';
 import {ShoppingCartOutlined} from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-
-const useStyles = makeStyles(theme=>({
-    offset: theme.mixins.toolbar,
-    section:{
-        marginRight: theme.spacing(2)
-    },
-    title:{
-        flexGrow: 1
-    }
-}))
+import { CartContext } from '../../cartContext'
 
 export const NavBar =() => {
+    const [cart, setCart] = useContext(CartContext);
     const classes = useStyles()
 return(
 
@@ -42,7 +34,10 @@ return(
                 </Typography>
             </Link>
             <Link to="/cart">
-                <ShoppingCartOutlined/>
+                <div>
+                    <ShoppingCartOutlined/>
+                    <span>{cart[0]}</span>
+                </div>
             </Link>
           </Toolbar>
         </AppBar>
@@ -50,3 +45,14 @@ return(
     </div>
 
 )}
+
+
+const useStyles = makeStyles(theme=>({
+    offset: theme.mixins.toolbar,
+    section:{
+        marginRight: theme.spacing(2)
+    },
+    title:{
+        flexGrow: 1
+    }
+}))

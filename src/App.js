@@ -8,6 +8,7 @@ import About from './components/About'
 import Store from './components/Store'
 import Cart from './components/Cart'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Context } from './cartContext'
 
 
 
@@ -27,19 +28,21 @@ useEffect(() => {
   return (
 
     <React.StrictMode>
-      <ThemeProvider theme={Theme}>
       <Router>
-        <NavBar/>
-        <Switch>
-          <Route path="/" exact component={Home}/>
-          <Route path="/home" component={Home}/>
-          <Route path="/about" component={About}/>
-          <Route path="/store" exact component={Store}/>
-          <Route path="/cart" component={Cart}/>
-          <Route path="/store/:id" component={ItemDetailContainer}></Route>
-        </Switch>
+        <ThemeProvider theme={Theme}>
+          <Context value={[]}>
+            <NavBar/>
+            <Switch>
+              <Route path="/" exact component={Home}/>
+              <Route path="/home" component={Home}/>
+              <Route path="/about" component={About}/>
+              <Route path="/store" exact component={Store}/>
+              <Route path="/cart" component={Cart}/>
+              <Route path="/store/:id" component={ItemDetailContainer}></Route>
+            </Switch>
+          </Context>
+        </ThemeProvider>
       </Router>
-      </ThemeProvider>
     </React.StrictMode>
 
   );

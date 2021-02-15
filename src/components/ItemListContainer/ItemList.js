@@ -17,7 +17,7 @@ const ItemList = ({items}) => {
                     <Item key={item.id} item={item}/>
                 )
             }
-            <Item item={promoItem}></Item>
+            {/* <Item item={promoItem}></Item> */}
         </Grid>
     );
 }
