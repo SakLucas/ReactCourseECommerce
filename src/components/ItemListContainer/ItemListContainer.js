@@ -6,6 +6,7 @@ import {Grid} from '@material-ui/core'
 
 const ItemListContainer = () =>{
     const [items, setItems] = useState(()=>[])
+    const [loading, setLoading] = useState(false);
 
     const fetchItems= () =>{
         return new Promise(resolve =>{
@@ -14,11 +15,32 @@ const ItemListContainer = () =>{
     }
 
     useEffect(()=>{
+        setLoading(true);
         fetchItems()
             .then(res=> res.json())
             .then(json=>setItems(json));
+    },[])
 
-        // const itemTask = new Promise((resolve,reject)=>{
+    useEffect(()=>{
+        items.length && setLoading(false);
+    },[items])
+
+    return(
+        <React.Fragment>
+            <Grid container>
+                    {items?.length === 0  && <h1>Loading...</h1>}
+                    <ItemList items={items}></ItemList>
+            </Grid>
+
+        </React.Fragment>
+    )
+}
+
+export default ItemListContainer;
+
+
+
+// const itemTask = new Promise((resolve,reject)=>{
         //     let res= [
         //         {
         //             id:127,
@@ -58,17 +80,3 @@ const ItemListContainer = () =>{
         //     ).catch(error=>
         //             console.error(`Error: ${error}`)
         //     );
-        },[])
-
-
-    return(
-        <React.Fragment>
-            <Grid container>
-                    <ItemList items={items}></ItemList>
-            </Grid>
-
-        </React.Fragment>
-    )
-}
-
-export default ItemListContainer;
