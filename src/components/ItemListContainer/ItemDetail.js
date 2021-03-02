@@ -5,16 +5,13 @@ import Button from '@material-ui/core/Button'
 import { CartContext } from './../../cartContext'
 
 const ItemDetail = ({details}) => {
-    const [stock, setStock] = useState(() => 0);
     const [selectedAmount, setSelectedAmount] = useState(()=> 0);
-    const [cart, setCart] = useContext(CartContext);
+    const {cart, addItem, stock} = useContext(CartContext);
 
     const handleItemCount = (amount) =>{
         setSelectedAmount(amount);
     }
-    useEffect(() => {
-        setStock(Math.round(Math.random() * 10) + 1);
-    }, [])
+
 
     return (
         <div>
@@ -30,13 +27,12 @@ const ItemDetail = ({details}) => {
                 //     <Button color="primary" variant="contained">Terminar mi compra</Button>
                 // </Link> */}
                 <Button 
-                variant="contained"
-                color={selectedAmount > 0? "primary" : "default"} 
-                disabled={selectedAmount > 0? false : true}
-                onClick={()=>setCart(selectedAmount)}> 
-                
-                    Agregar al carrito
-            </Button>
+                    variant="contained"
+                    color={selectedAmount > 0? "primary" : "default"} 
+                    disabled={selectedAmount > 0? false : true}
+                    onClick={()=>addItem(details, selectedAmount)}> 
+                        Agregar al carrito
+                </Button>
         </div>
     );
 }

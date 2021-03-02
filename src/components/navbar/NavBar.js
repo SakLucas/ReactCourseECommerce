@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../../cartContext'
 
 export const NavBar =() => {
-    const [cart, setCart] = useContext(CartContext);
+    const context = useContext(CartContext);
     const classes = useStyles()
 return(
 
@@ -36,7 +36,7 @@ return(
             <Link to="/cart">
                 <div>
                     <ShoppingCartOutlined/>
-                    <span>{cart[0]}</span>
+                    <span>{context.cart[0]}</span>
                 </div>
             </Link>
           </Toolbar>

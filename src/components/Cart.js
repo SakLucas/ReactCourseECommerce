@@ -3,13 +3,16 @@ import {Grid} from '@material-ui/core'
 import { CartContext } from './../cartContext'
 
 function Store() {
-    const [cart, setCart] = useContext(CartContext);
+    const context = useContext(CartContext);
 
     return (
-        <div>
-            <h1>CART</h1>
-            <span>{cart}</span>
-        </div>
+        // <CartContext.Consumer>
+            <div>
+                <h1>CART</h1>
+                <span>{context.stock}</span>
+            </div>
+        // </CartContext.Consumer>
+        
     )
 }
 
