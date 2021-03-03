@@ -1,29 +1,37 @@
-import React, { useContext } from 'react'
-import {Grid} from '@material-ui/core'
+import React, { useContext, useEffect, useState } from 'react'
+import {Grid, Button} from '@material-ui/core'
 import { CartContext } from './../cartContext'
+import ItemListContainer from './ItemListContainer/ItemListContainer';
+import Item from '../components/ItemListContainer/Item'
+import CheckoutForm from '../components/CheckoutForm'
 
-function Store() {
-    const context = useContext(CartContext);
+function Cart() {
+    const { cart } = useContext(CartContext);
+
+    const [inCheckout, setInCheckout] = useState(false);
+
+
+    const subtotal = cart.reduce((a, b) => a + b.price * b.amount, 0);
 
     return (
-        // <CartContext.Consumer>
             <div>
-                <h1>CART</h1>
-                <span>{context.stock}</span>
+                <h1>Cart</h1>
+                <Grid container>
+                {
+                    cart.map((item)=>
+                        <Item key={item.id} item={item} inCart={true}/>
+                    )
+                }
+                </Grid>
+                <h2>TOTAL:${subtotal}</h2>
+                <Button variant="contained" color="primary" onClick={() => setInCheckout(prevValue => !prevValue)} disabled={inCheckout || cart.length === 0}>Checkout</Button>
+                {inCheckout && (
+                    <>
+                        <CheckoutForm cart={cart} subtotal={subtotal} />
+                    </>
+                )}
             </div>
-        // </CartContext.Consumer>
-        
     )
 }
 
-export default Store;
-
-
-        //     <Grid container>
-        //     {
-        //         items.map((item)=>
-        //             <Item key={item.id} item={item}/>
-        //         )
-        //     }
-        //     {/* <Item item={promoItem}></Item> */}
-        // </Grid>
+export default Cart;

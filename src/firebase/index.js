@@ -1,7 +1,7 @@
-import * as Firebase from "firebase/app"
-import "firebase/firestore"
+import firebase from "firebase/app"
+import "@firebase/firestore"
 
-const App = Firebase.initializeApp({
+const App = firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_AUTHDOMAI,
     projectId: process.env.REACT_APP_PROJECTID,
@@ -11,5 +11,7 @@ const App = Firebase.initializeApp({
     measurementId: process.env.REACT_APP_MEASUREMENTID
   });
 
-  export function getFirebase() {return App};
-  export function getFirestore() {return Firebase.firestore(App)};
+function getFirebase() {return App};
+function getFirestore() {return firebase.firestore(App)};
+
+export { getFirebase, getFirestore, firebase }

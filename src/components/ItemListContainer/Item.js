@@ -3,7 +3,7 @@ import { Button, Box, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import ItemCount from './ItemCount'
 
-const Item = ({item}) => {
+const Item = ({item, inCart}) => {
 
     return (
         <Grid
@@ -23,14 +23,19 @@ const Item = ({item}) => {
                 alignItems="center"
                 justify="center"
             >
-                <span>{item.title}</span>
-                <img style={{maxWidth:'150px',maxHeight:'150px'}}alt="FALLBACK" src={item.image}/>
+                <span>{item.name}</span>
+                <img style={{maxWidth:'150px',maxHeight:'150px'}}alt="FALLBACK" src={item.imgUrl}/>
                 <br/>
                 <br/>
+                {!inCart ? 
                 <Link to={`/store/${item.id}`}>
                     <Button variant="contained" color="primary">Ver Producto</Button>
                 </Link>
-                {/* <ItemCount stock={5} inicial={1}></ItemCount> */}
+                : (<>
+                        <span>${item.price}</span>
+                        <span>Cantidad:{item.amount}</span>
+                        <span>Subtotal:${item.amount * item.price}</span>
+                </> )}
             </Box>
         </Grid>
 

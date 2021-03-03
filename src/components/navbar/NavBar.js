@@ -36,7 +36,7 @@ return(
             <Link to="/cart">
                 <div>
                     <ShoppingCartOutlined/>
-                    <span>{context.cart[0]}</span>
+                    <span>{context.cart.length}</span>
                 </div>
             </Link>
           </Toolbar>

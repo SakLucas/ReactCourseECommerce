@@ -12,11 +12,12 @@ export default function ItemCount({stock, inicial = 0, handlerClick}){
 
     }
     function incrementCount(){
-        if(count < stock) {
-            setCount(prevCount =>prevCount + 1);
-            handlerClick(count + 1)
-        };
-
+        // if(count < stock) {
+        //     setCount(prevCount =>prevCount + 1);
+        //     handlerClick(count + 1)
+        // };
+        setCount(prevCount =>prevCount + 1);
+        handlerClick(count + 1)
     }
 
     return(

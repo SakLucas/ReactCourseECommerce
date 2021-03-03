@@ -3,26 +3,30 @@ import ItemCount from './ItemCount'
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import { CartContext } from './../../cartContext'
+import { useFirestore } from '../../firebase/useFirestore';
 
-const ItemDetail = ({details}) => {
+const ItemDetail = ({details, fetching}) => {
     const [selectedAmount, setSelectedAmount] = useState(()=> 0);
-    const {cart, addItem, stock} = useContext(CartContext);
+    const {cart, addItem} = useContext(CartContext);
 
     const handleItemCount = (amount) =>{
         setSelectedAmount(amount);
     }
-
+    
 
     return (
+        
         <div>
-            <img style={{maxHeight:400}}alt="FALLBACK" src={details.image}/>
-            <h1>{details?.title}</h1>
+        {fetching ? <span>Loading</span> : (
+            <>
+            <img style={{maxHeight:400}} alt="FALLBACK" src={details?.imgUrl}/>
+            <h1>{details?.name}</h1>
             <strong>${details?.price}</strong><br/>
             <span>{details?.description}</span><br/>
-            <span>Stock: {stock}</span><br/>
+            {/* <span>Stock: {details?.stock}</span><br/> */}
             <span>SelectedAmount:{selectedAmount}</span><br/>
-            <span>CART CONTEXT: {cart}</span>
-            <ItemCount stock={stock} handlerClick={handleItemCount}/>
+            
+            <ItemCount  handlerClick={handleItemCount}/>
                 {/* // <Link to={'/cart'}>
                 //     <Button color="primary" variant="contained">Terminar mi compra</Button>
                 // </Link> */}
@@ -33,6 +37,8 @@ const ItemDetail = ({details}) => {
                     onClick={()=>addItem(details, selectedAmount)}> 
                         Agregar al carrito
                 </Button>
+             </>
+             )}
         </div>
     );
 }

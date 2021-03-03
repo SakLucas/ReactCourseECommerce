@@ -4,12 +4,25 @@ export const CartContext = React.createContext(0);
 
 export const Context = ({children}) => {
 
-    const [cart, setCart] = useState([0]);
-    const stock = 14;
-    
+    const [cart, setCart] = useState([]);
+    const count = 0;  
+
     function addItem(item, amount){
-        console.log(item.id, amount);
-        setCart(prev => parseInt(prev) + amount)
+        console.log(cart);
+        if(cart.some(el => el.id === item.id)){
+           const index = cart.findIndex(el => el.id === item.id);
+           const cartCopy = cart;
+           cartCopy[index].amount += amount;
+           setCart(cartCopy);
+        }else{
+            setCart([...cart,{...item,amount}])
+        }
+    }
+
+    function removeItem(itemToBeRemoved) {
+        const updatedCart = cart.filter(item => item.id !== itemToBeRemoved.id);
+        setCart([...updatedCart]);
+        // setCount(count - 1);
     }
 
     function getFromContext(id){
@@ -17,7 +30,7 @@ export const Context = ({children}) => {
     }
 
         return(
-            <CartContext.Provider value={{cart, addItem, stock}}>
+            <CartContext.Provider value={{cart, addItem, removeItem}}>
                 {children}
             </CartContext.Provider>
         )
